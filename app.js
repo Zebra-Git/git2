@@ -1,4 +1,4 @@
-let tasks = [];
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
 function addTask() {
     const input = document.getElementById('taskInput');
@@ -7,13 +7,19 @@ function addTask() {
     if (task) {
         tasks.push(task);
         input.value = '';
+        saveTasks();
         renderTasks();
     }
 }
 
 function deleteTask(index) {
     tasks.splice(index, 1);
+    saveTasks();
     renderTasks();
+}
+
+function saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 function renderTasks() {
