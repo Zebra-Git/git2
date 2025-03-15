@@ -65,6 +65,26 @@ button:hover {
     background-color: #f8f9fa;
     margin-bottom: 8px;
     border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+#taskList li.completed {
+    background-color: #e8f5e9;
+    text-decoration: line-through;
+    color: #666;
+}
+
+.task-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.complete-btn {
+    background-color: #28a745;
+}
+
+.complete-btn:hover {
+    background-color: #218838;
 }
 
 .delete-btn {
