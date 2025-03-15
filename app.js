@@ -1,13 +1,18 @@
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 let completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || [];
+let taskDates = JSON.parse(localStorage.getItem('taskDates')) || [];
 
 function addTask() {
     const input = document.getElementById('taskInput');
+    const dateInput = document.getElementById('taskDate');
     const task = input.value.trim();
+    const date = dateInput.value;
     
     if (task) {
         tasks.push(task);
+        taskDates.push(date);
         input.value = '';
+        dateInput.value = '';
         saveTasks();
         renderTasks();
     }
@@ -16,6 +21,7 @@ function addTask() {
 function deleteTask(index) {
     tasks.splice(index, 1);
     completedTasks.splice(index, 1);
+    taskDates.splice(index, 1);
     saveTasks();
     renderTasks();
 }
@@ -29,6 +35,7 @@ function toggleTask(index) {
 function saveTasks() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
     localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
+    localStorage.setItem('taskDates', JSON.stringify(taskDates));
 }
 
 function renderTasks() {
@@ -42,6 +49,7 @@ function renderTasks() {
         }
         li.innerHTML = `
             ${task}
+            ${taskDates[index] ? `<span class="task-date">(${taskDates[index]})</span>` : ''}
             <div class="task-controls">
                 <button class="complete-btn" onclick="toggleTask(${index})">
                     ${completedTasks[index] ? 'Отменить' : 'Готово'}
